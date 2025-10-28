@@ -1,0 +1,385 @@
+{
+  "metadata": {
+    "generated_date": "2025-10-26_14:11:40",
+    "script": "battery_feature_pipeline.py",
+    "purpose": "Physics-informed feature extraction from NASA battery data"
+  },
+  "summary": {
+    "total_cycles": 2167,
+    "unique_batteries": 4,
+    "output_files_count": 29
+  },
+  "feature_definitions": {
+    "file": {
+      "type": "string",
+      "description": "Battery .mat filename (e.g., B0005.mat)",
+      "physics": "Cell identifier for grouping cycles",
+      "units": "N/A",
+      "example": "B0005.mat"
+    },
+    "cell_key": {
+      "type": "string",
+      "description": "MATLAB key for battery object inside .mat file",
+      "physics": "Internal data structure identifier",
+      "units": "N/A",
+      "example": "B0005"
+    },
+    "cycle_index": {
+      "type": "integer",
+      "description": "Zero-indexed charge/discharge cycle number",
+      "physics": "Ordinal position in battery lifetime",
+      "units": "cycles",
+      "example": "0, 1, 2, ..., N"
+    },
+    "n_points": {
+      "type": "integer",
+      "description": "Number of time-series measurement points in this cycle",
+      "physics": "Data resolution / sampling density",
+      "units": "samples",
+      "example": "1024"
+    },
+    "duration_s": {
+      "type": "float",
+      "description": "Total time duration of one cycle (Time[-1] - Time[0])",
+      "physics": "Cycle execution time; affects thermal effects",
+      "units": "seconds",
+      "example": "3600.5"
+    },
+    "voltage_start": {
+      "type": "float",
+      "description": "Voltage at beginning of cycle (V[0])",
+      "physics": "Initial state-of-charge indicator",
+      "units": "Volts",
+      "example": "4.1"
+    },
+    "voltage_end": {
+      "type": "float",
+      "description": "Voltage at end of cycle (V[-1])",
+      "physics": "Final state-of-charge indicator",
+      "units": "Volts",
+      "example": "2.0"
+    },
+    "voltage_delta": {
+      "type": "float",
+      "description": "Total voltage change during cycle (V_end - V_start)",
+      "physics": "Charge/discharge depth; impacts degradation rate",
+      "units": "Volts",
+      "example": "-2.1"
+    },
+    "voltage_slope_V_per_s": {
+      "type": "float",
+      "description": "Linear regression slope of V vs Time",
+      "physics": "\u2605 KEY INDICATOR: voltage degradation rate",
+      "units": "V/s",
+      "example": "-0.0006",
+      "interpretation": "More negative = faster discharge = more aged battery"
+    },
+    "voltage_std": {
+      "type": "float",
+      "description": "Standard deviation of voltage measurements",
+      "physics": "Voltage stability; high values indicate noise/artifacts",
+      "units": "Volts",
+      "example": "0.045"
+    },
+    "current_mean": {
+      "type": "float",
+      "description": "Mean current over entire cycle",
+      "physics": "Average charge/discharge intensity",
+      "units": "Amperes",
+      "example": "1.8"
+    },
+    "current_std": {
+      "type": "float",
+      "description": "Standard deviation of current measurements",
+      "physics": "Current variability; control quality indicator",
+      "units": "Amperes",
+      "example": "0.15"
+    },
+    "temp_start": {
+      "type": "float",
+      "description": "Temperature at cycle start",
+      "physics": "Initial thermal state",
+      "units": "Celsius",
+      "example": "24.5"
+    },
+    "temp_end": {
+      "type": "float",
+      "description": "Temperature at cycle end",
+      "physics": "Final thermal state after charge/discharge",
+      "units": "Celsius",
+      "example": "27.8"
+    },
+    "temp_change": {
+      "type": "float",
+      "description": "Temperature rise during cycle (T_end - T_start)",
+      "physics": "\u2605 KEY INDICATOR: electrochemical heating; drives aging",
+      "units": "Celsius",
+      "example": "3.3"
+    },
+    "energy_proxy_VAs": {
+      "type": "float",
+      "description": "Energy throughput approximation: sum(V[i] * I[i] * dt[i])",
+      "physics": "\u2605 KEY INDICATOR: total work done; coulombic throughput proxy",
+      "units": "V\u00b7A\u00b7s (Joule equivalent)",
+      "example": "18500.2",
+      "interpretation": "Cumulative energy enables cycle-to-cycle aging assessment"
+    },
+    "capacity": {
+      "type": "float",
+      "description": "Measured battery capacity at end of cycle",
+      "physics": "\u2605 GOLD STANDARD: direct measure of state-of-health (SOH)",
+      "units": "Amp-hours (Ah)",
+      "example": "1.85"
+    },
+    "capacity_ratio": {
+      "type": "float",
+      "description": "Normalized capacity: Capacity[i] / Capacity[0] (first cycle)",
+      "physics": "\u2605 DEGRADATION METRIC: tracks SOH relative to brand new battery",
+      "units": "dimensionless (0.0 to 1.0)",
+      "example": "0.95",
+      "interpretation": "0.95 = 95% of original capacity; 0.80 = 80% (end-of-life)"
+    }
+  },
+  "feature_statistics": {
+    "cycle_index": {
+      "count": 2167,
+      "count_missing": 0,
+      "completeness_percent": 100.0,
+      "mean": 285.6395939086294,
+      "std": 176.0606920280542,
+      "min": 0.0,
+      "q25": 135.0,
+      "median": 270.0,
+      "q75": 435.0,
+      "max": 615.0
+    },
+    "n_points": {
+      "count": 2167,
+      "count_missing": 0,
+      "completeness_percent": 100.0,
+      "mean": 964.0286109829257,
+      "std": 1445.1812351761052,
+      "min": 0.0,
+      "q25": 0.0,
+      "median": 297.0,
+      "q75": 952.0,
+      "max": 3900.0
+    },
+    "duration_s": {
+      "count": 1280,
+      "count_missing": 887,
+      "completeness_percent": 59.1,
+      "mean": 6747.04123671875,
+      "std": 3696.237453893048,
+      "min": 12.656000000000002,
+      "q25": 3074.266,
+      "median": 3681.2889999999998,
+      "q75": 10510.453,
+      "max": 10815.375
+    },
+    "voltage_start": {
+      "count": 1280,
+      "count_missing": 887,
+      "completeness_percent": 59.1,
+      "mean": 3.8832598790328747,
+      "std": 0.4212709938697691,
+      "min": 0.2363561841526786,
+      "q25": 3.639845005930101,
+      "median": 4.1337768585771,
+      "q75": 4.190481431166459,
+      "max": 8.393141180564633
+    },
+    "voltage_end": {
+      "count": 1280,
+      "count_missing": 887,
+      "completeness_percent": 59.1,
+      "mean": 3.749511401991775,
+      "std": 0.5243460597656592,
+      "min": 1.813269430976001,
+      "q25": 3.400130495092413,
+      "median": 4.1682749927708596,
+      "q75": 4.196961716598341,
+      "max": 4.213439684000495
+    },
+    "voltage_delta": {
+      "count": 1280,
+      "count_missing": 887,
+      "completeness_percent": 59.1,
+      "mean": -0.13374847704109954,
+      "std": 0.8533871412458796,
+      "min": -4.191206083832206,
+      "q25": -0.7970296916039555,
+      "median": 0.044175414992262345,
+      "q75": 0.5629829218250243,
+      "max": 3.977083499847816
+    },
+    "voltage_slope_V_per_s": {
+      "count": 1279,
+      "count_missing": 888,
+      "completeness_percent": 59.0,
+      "mean": 0.0007608868015301649,
+      "std": 0.017857554495555955,
+      "min": -0.0003079828081157,
+      "q25": -0.00022618006852395,
+      "median": -6.866274946101912e-06,
+      "q75": 1.9847699709994797e-05,
+      "max": 0.3942392841533763
+    },
+    "voltage_std": {
+      "count": 1279,
+      "count_missing": 888,
+      "completeness_percent": 59.0,
+      "mean": 0.17840544637667882,
+      "std": 0.12522515127435968,
+      "min": 0.0162459866921684,
+      "q25": 0.09391150148582585,
+      "median": 0.1985517743349728,
+      "q75": 0.24415504519675035,
+      "max": 2.2761056822136934
+    },
+    "current_mean": {
+      "count": 1279,
+      "count_missing": 888,
+      "completeness_percent": 59.0,
+      "mean": -0.605391735753587,
+      "std": 1.2303925221536878,
+      "min": -1.9997552547832569,
+      "q25": -1.850638284353567,
+      "median": 0.0073240257131663,
+      "q75": 0.5629914271511369,
+      "max": 1.00694637470044
+    },
+    "current_std": {
+      "count": 1279,
+      "count_missing": 888,
+      "completeness_percent": 59.0,
+      "mean": 0.5636046330778757,
+      "std": 0.13668732413993298,
+      "min": 0.0007298501374361,
+      "q25": 0.519537995170599,
+      "median": 0.597943199603589,
+      "q75": 0.6431565915031897,
+      "max": 0.8647472127992183
+    },
+    "temp_start": {
+      "count": 1280,
+      "count_missing": 887,
+      "completeness_percent": 59.1,
+      "mean": 25.746204148860205,
+      "std": 2.923999355931418,
+      "min": 21.819303738176885,
+      "q25": 23.9457363811835,
+      "median": 24.697116297767426,
+      "q75": 26.177025180932784,
+      "max": 36.186651345077465
+    },
+    "temp_end": {
+      "count": 1280,
+      "count_missing": 887,
+      "completeness_percent": 59.1,
+      "mean": 30.11886766097125,
+      "std": 6.349445619419529,
+      "min": 22.354114446503647,
+      "q25": 24.023885782135146,
+      "median": 25.37059582965173,
+      "q75": 35.76477811566525,
+      "max": 41.0499421893331
+    },
+    "temp_change": {
+      "count": 1280,
+      "count_missing": 887,
+      "completeness_percent": 59.1,
+      "mean": 4.372663512111048,
+      "std": 8.422678480614382,
+      "min": -11.819723000289844,
+      "q25": -2.0490391863962243,
+      "median": 0.6075909449545271,
+      "q75": 11.717437999922996,
+      "max": 16.569805728354336
+    },
+    "energy_proxy_VAs": {
+      "count": 1279,
+      "count_missing": 888,
+      "completeness_percent": 59.0,
+      "mean": 1649.0844580169878,
+      "std": 21930.089565738963,
+      "min": -26088.268429180735,
+      "q25": -19808.467316524133,
+      "median": 64.35901339455772,
+      "q75": 23067.171226792427,
+      "max": 30098.686476916395
+    },
+    "capacity": {
+      "count": 636,
+      "count_missing": 1531,
+      "completeness_percent": 29.3,
+      "mean": 1.5816518122788688,
+      "std": 0.19876466837791598,
+      "min": 1.15381833159625,
+      "q25": 1.4211226690112522,
+      "median": 1.5596947155156364,
+      "q75": 1.7634860433534145,
+      "max": 2.035337591005598
+    },
+    "capacity_ratio": {
+      "count": 636,
+      "count_missing": 1531,
+      "completeness_percent": 29.3,
+      "mean": 0.8284816779739228,
+      "std": 0.10930582047757625,
+      "min": 0.5668928519254556,
+      "q25": 0.7480673043905963,
+      "median": 0.8231780853865667,
+      "q75": 0.9252619823462459,
+      "max": 1.0
+    }
+  },
+  "key_metrics": {
+    "capacity_ratio": {
+      "description": "State of Health indicator",
+      "range": "0.0 to 1.0",
+      "interpretation": {
+        "1.0": "Brand new battery (first cycle)",
+        "0.95": "Excellent health (~95% capacity retained)",
+        "0.90": "Good health (95-100 cycles typical)",
+        "0.80": "Degraded (near end-of-life threshold)",
+        "0.70": "Critical (battery usually retired)"
+      },
+      "usage": "Primary metric for predicting remaining useful life (RUL)"
+    },
+    "voltage_slope_V_per_s": {
+      "description": "Voltage degradation rate during discharge",
+      "range": "Negative values, typically -0.0001 to -0.001",
+      "physics": "More negative = faster discharge = older battery",
+      "interpretation": {
+        "-0.00001": "Excellent health, stable discharge profile",
+        "-0.0001": "Normal operation, new-to-mid-life",
+        "-0.001": "Degraded, increased internal resistance",
+        "-0.01": "Critical condition"
+      },
+      "usage": "Sensitive early indicator of degradation"
+    },
+    "energy_proxy_VAs": {
+      "description": "Cumulative energy throughput",
+      "range": "Varies by cycle depth; typically 5000-50000 V\u00b7A\u00b7s",
+      "physics": "Total electrical work; drives aging mechanisms",
+      "interpretation": {
+        "low": "Shallow cycle (e.g., 10% depth)",
+        "high": "Deep cycle (e.g., 100% depth)"
+      },
+      "usage": "Enables usage-dependent aging models"
+    },
+    "temp_change": {
+      "description": "Temperature rise during cycle",
+      "range": "0 to 20\u00b0C typical",
+      "physics": "Electrochemical heating; accelerates aging",
+      "interpretation": {
+        "0-2\u00b0C": "Low rate, cool operation",
+        "2-5\u00b0C": "Normal operation",
+        "5-10\u00b0C": "Elevated heating, accelerated aging",
+        ">10\u00b0C": "Excessive thermal stress"
+      },
+      "usage": "Thermal stress predictor"
+    }
+  }
+}

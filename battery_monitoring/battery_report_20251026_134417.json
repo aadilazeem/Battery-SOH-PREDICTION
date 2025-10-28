@@ -1,0 +1,194 @@
+{
+  "metadata": {
+    "generated_at": "2025-10-26T13:44:18.276545",
+    "total_samples": 61,
+    "timestamp": "20251026_134417"
+  },
+  "statistics": {
+    "energy_range": {
+      "min": -1.5,
+      "max": 1.5
+    },
+    "temperature_range": {
+      "min": 5.0,
+      "max": 69.3,
+      "unit": "Celsius"
+    },
+    "capacity_retention": {
+      "initial": 0.906,
+      "final": 0.72,
+      "total_fade_percent": 18.600000000000005
+    },
+    "voltage_stability": {
+      "mean_std": 0.08043278688524591,
+      "max_std": 0.144,
+      "threshold": 0.15,
+      "samples_above_threshold": 0
+    },
+    "discharge_behavior": {
+      "mean_curvature": 1.0703934426229507,
+      "max_curvature": 3.5,
+      "unusual_threshold": 2.0,
+      "unusual_samples": 10
+    }
+  },
+  "anomalies": {
+    "measurement_artifacts": {
+      "count": 0,
+      "details": []
+    },
+    "unusual_aging_patterns": {
+      "count": 10,
+      "details": [
+        {
+          "energy_proxy": 1.05,
+          "partial_dependence": 0.72,
+          "temp_change": 42.7,
+          "thermal_factor": 0.872,
+          "combined_degradation": 0.696,
+          "voltage_std": 0.1023,
+          "discharge_curvature_coeff": 2.114,
+          "measurement_artifact": false,
+          "unusual_aging": true,
+          "timestamp": "2025-10-26T13:44:17.112735",
+          "sample_id": 51
+        },
+        {
+          "energy_proxy": 1.1,
+          "partial_dependence": 0.72,
+          "temp_change": 45.4,
+          "thermal_factor": 0.864,
+          "combined_degradation": 0.679,
+          "voltage_std": 0.1072,
+          "discharge_curvature_coeff": 2.335,
+          "measurement_artifact": false,
+          "unusual_aging": true,
+          "timestamp": "2025-10-26T13:44:17.112735",
+          "sample_id": 52
+        },
+        {
+          "energy_proxy": 1.15,
+          "partial_dependence": 0.72,
+          "temp_change": 48.2,
+          "thermal_factor": 0.856,
+          "combined_degradation": 0.661,
+          "voltage_std": 0.1214,
+          "discharge_curvature_coeff": 2.492,
+          "measurement_artifact": false,
+          "unusual_aging": true,
+          "timestamp": "2025-10-26T13:44:17.112735",
+          "sample_id": 53
+        },
+        {
+          "energy_proxy": 1.2,
+          "partial_dependence": 0.72,
+          "temp_change": 51.0,
+          "thermal_factor": 0.847,
+          "combined_degradation": 0.643,
+          "voltage_std": 0.1173,
+          "discharge_curvature_coeff": 2.656,
+          "measurement_artifact": false,
+          "unusual_aging": true,
+          "timestamp": "2025-10-26T13:44:17.112735",
+          "sample_id": 54
+        },
+        {
+          "energy_proxy": 1.25,
+          "partial_dependence": 0.72,
+          "temp_change": 53.9,
+          "thermal_factor": 0.838,
+          "combined_degradation": 0.625,
+          "voltage_std": 0.1104,
+          "discharge_curvature_coeff": 2.842,
+          "measurement_artifact": false,
+          "unusual_aging": true,
+          "timestamp": "2025-10-26T13:44:17.112735",
+          "sample_id": 55
+        },
+        {
+          "energy_proxy": 1.3,
+          "partial_dependence": 0.72,
+          "temp_change": 56.9,
+          "thermal_factor": 0.829,
+          "combined_degradation": 0.607,
+          "voltage_std": 0.1243,
+          "discharge_curvature_coeff": 3.158,
+          "measurement_artifact": false,
+          "unusual_aging": true,
+          "timestamp": "2025-10-26T13:44:17.113735",
+          "sample_id": 56
+        },
+        {
+          "energy_proxy": 1.35,
+          "partial_dependence": 0.72,
+          "temp_change": 59.9,
+          "thermal_factor": 0.82,
+          "combined_degradation": 0.588,
+          "voltage_std": 0.127,
+          "discharge_curvature_coeff": 3.249,
+          "measurement_artifact": false,
+          "unusual_aging": true,
+          "timestamp": "2025-10-26T13:44:17.113735",
+          "sample_id": 57
+        },
+        {
+          "energy_proxy": 1.4,
+          "partial_dependence": 0.72,
+          "temp_change": 63.0,
+          "thermal_factor": 0.811,
+          "combined_degradation": 0.569,
+          "voltage_std": 0.1318,
+          "discharge_curvature_coeff": 3.382,
+          "measurement_artifact": false,
+          "unusual_aging": true,
+          "timestamp": "2025-10-26T13:44:17.113735",
+          "sample_id": 58
+        },
+        {
+          "energy_proxy": 1.45,
+          "partial_dependence": 0.72,
+          "temp_change": 66.1,
+          "thermal_factor": 0.802,
+          "combined_degradation": 0.551,
+          "voltage_std": 0.1417,
+          "discharge_curvature_coeff": 3.5,
+          "measurement_artifact": false,
+          "unusual_aging": true,
+          "timestamp": "2025-10-26T13:44:17.113735",
+          "sample_id": 59
+        },
+        {
+          "energy_proxy": 1.5,
+          "partial_dependence": 0.72,
+          "temp_change": 69.3,
+          "thermal_factor": 0.792,
+          "combined_degradation": 0.532,
+          "voltage_std": 0.144,
+          "discharge_curvature_coeff": 3.5,
+          "measurement_artifact": false,
+          "unusual_aging": true,
+          "timestamp": "2025-10-26T13:44:17.113735",
+          "sample_id": 60
+        }
+      ]
+    }
+  },
+  "phases": {
+    "phase_1_stable": {
+      "range": "-1.50 to -0.75",
+      "avg_capacity": 0.913
+    },
+    "phase_2_gradual": {
+      "range": "-0.75 to 0.0",
+      "avg_capacity": 0.9285
+    },
+    "phase_3_rapid": {
+      "range": "0.0 to 0.5",
+      "avg_capacity": 0.901
+    },
+    "phase_4_plateau": {
+      "range": "0.5 to 1.50",
+      "avg_capacity": 0.7515000000000001
+    }
+  }
+}

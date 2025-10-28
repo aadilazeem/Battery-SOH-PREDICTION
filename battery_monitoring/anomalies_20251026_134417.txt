@@ -1,0 +1,87 @@
+======================================================================
+BATTERY DEGRADATION MONITORING - ANOMALY LOG
+======================================================================
+
+Report Generated: 2025-10-26 13:44:18
+
+⚠️  MEASUREMENT ARTIFACTS (Voltage Instability)
+----------------------------------------------------------------------
+No measurement artifacts detected.
+
+
+⚠️  UNUSUAL AGING PATTERNS (Non-linear Discharge)
+----------------------------------------------------------------------
+Sample ID: 51
+  Energy Proxy: 1.05 VA
+  Discharge Curvature Coeff: 2.114 (Threshold: 2.0)
+  Voltage Std Dev: 0.1023 V
+  Capacity Retention: 72.0%
+  Timestamp: 2025-10-26T13:44:17.112735
+
+Sample ID: 52
+  Energy Proxy: 1.10 VA
+  Discharge Curvature Coeff: 2.335 (Threshold: 2.0)
+  Voltage Std Dev: 0.1072 V
+  Capacity Retention: 72.0%
+  Timestamp: 2025-10-26T13:44:17.112735
+
+Sample ID: 53
+  Energy Proxy: 1.15 VA
+  Discharge Curvature Coeff: 2.492 (Threshold: 2.0)
+  Voltage Std Dev: 0.1214 V
+  Capacity Retention: 72.0%
+  Timestamp: 2025-10-26T13:44:17.112735
+
+Sample ID: 54
+  Energy Proxy: 1.20 VA
+  Discharge Curvature Coeff: 2.656 (Threshold: 2.0)
+  Voltage Std Dev: 0.1173 V
+  Capacity Retention: 72.0%
+  Timestamp: 2025-10-26T13:44:17.112735
+
+Sample ID: 55
+  Energy Proxy: 1.25 VA
+  Discharge Curvature Coeff: 2.842 (Threshold: 2.0)
+  Voltage Std Dev: 0.1104 V
+  Capacity Retention: 72.0%
+  Timestamp: 2025-10-26T13:44:17.112735
+
+Sample ID: 56
+  Energy Proxy: 1.30 VA
+  Discharge Curvature Coeff: 3.158 (Threshold: 2.0)
+  Voltage Std Dev: 0.1243 V
+  Capacity Retention: 72.0%
+  Timestamp: 2025-10-26T13:44:17.113735
+
+Sample ID: 57
+  Energy Proxy: 1.35 VA
+  Discharge Curvature Coeff: 3.249 (Threshold: 2.0)
+  Voltage Std Dev: 0.1270 V
+  Capacity Retention: 72.0%
+  Timestamp: 2025-10-26T13:44:17.113735
+
+Sample ID: 58
+  Energy Proxy: 1.40 VA
+  Discharge Curvature Coeff: 3.382 (Threshold: 2.0)
+  Voltage Std Dev: 0.1318 V
+  Capacity Retention: 72.0%
+  Timestamp: 2025-10-26T13:44:17.113735
+
+Sample ID: 59
+  Energy Proxy: 1.45 VA
+  Discharge Curvature Coeff: 3.500 (Threshold: 2.0)
+  Voltage Std Dev: 0.1417 V
+  Capacity Retention: 72.0%
+  Timestamp: 2025-10-26T13:44:17.113735
+
+Sample ID: 60
+  Energy Proxy: 1.50 VA
+  Discharge Curvature Coeff: 3.500 (Threshold: 2.0)
+  Voltage Std Dev: 0.1440 V
+  Capacity Retention: 72.0%
+  Timestamp: 2025-10-26T13:44:17.113735
+
+
+======================================================================
+END OF ANOMALY LOG
+======================================================================
