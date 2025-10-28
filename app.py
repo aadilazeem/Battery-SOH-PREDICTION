@@ -60,10 +60,11 @@ st.markdown("""
     }
     .ab-range-box {
         padding: 15px;
-        background-color: #fce4ec;
+        background-color: #C28B51;
         border-radius: 8px;
-        border-left: 4px solid #ec407a;
+        border-left: 4px solid #8B6F47;
         margin: 10px 0;
+        color: white;
     }
     .footer-box {
         text-align: center;
@@ -925,14 +926,14 @@ with ab_test_tab1:
 
 with ab_test_tab2:
     st.markdown("""
-    <div class="ab-test-box">
-        <h3>Feature Range Suggestions for A/B Testing</h3>
-        <p>These ranges are derived from physics-informed data analysis and recommended for valid A/B tests.</p>
+    <div class="ab-range-box">
+        <h3 style='color: white;'>Feature Range Suggestions for A/B Testing</h3>
+        <p style='color: white;'>These ranges are derived from physics-informed data analysis and recommended for valid A/B tests.</p>
     </div>
     """, unsafe_allow_html=True)
     
     st.markdown("""
-    <div class="ab-test-box">
+    <div class="ab-range-box" style='margin-bottom: 20px;'>
     """, unsafe_allow_html=True)
     selected_features = st.multiselect(
         "🎯 Select features to analyze",
@@ -969,14 +970,14 @@ with ab_test_tab2:
                 low, high = suggestions['recommended_range']
                 st.markdown(f"""
                 <div class="ab-range-box">
-                **Lower Bound:** {low:.6f}
+                <b style='color: white;'>Lower Bound:</b> {low:.6f}
                 
-                **Central Point:** {suggestions['median']:.6f}
+                <b style='color: white;'>Central Point:</b> {suggestions['median']:.6f}
                 
-                **Upper Bound:** {high:.6f}
+                <b style='color: white;'>Upper Bound:</b> {high:.6f}
                 
                 ---
-                **Why IQR?** Covers typical 50% of battery operating conditions. Represents realistic degradation scenarios.
+                <b style='color: white;'>Why IQR?</b> Covers typical 50% of battery operating conditions. Represents realistic degradation scenarios.
                 </div>
                 """, unsafe_allow_html=True)
             
@@ -1503,13 +1504,13 @@ with chat_container:
     for message in st.session_state.chat_history:
         if message['role'] == 'user':
             st.markdown(f"""
-            <div style='background-color: #d68d7c; padding: 12px; border-radius: 8px; margin: 8px 0; border-left: 4px solid #3498db;'>
+            <div style='background-color: #e8f4f8; padding: 12px; border-radius: 8px; margin: 8px 0; border-left: 4px solid #3498db;'>
                 <b>👤 You:</b> {message['content']}
             </div>
             """, unsafe_allow_html=True)
         else:
             st.markdown(f"""
-            <div style='background-color: #d68d7c; padding: 12px; border-radius: 8px; margin: 8px 0; border-left: 4px solid #ec407a;'>
+            <div style='background-color: #fce4ec; padding: 12px; border-radius: 8px; margin: 8px 0; border-left: 4px solid #ec407a;'>
                 <b>🤖 Claude AI:</b> {message['content']}
             </div>
             """, unsafe_allow_html=True)
@@ -1586,7 +1587,7 @@ with col_chat:
         last_msg = st.session_state.chat_history[-1]
         if last_msg['role'] == 'assistant':
             st.markdown(f"""
-            <div style='background-color: #d68d7c; padding: 12px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #ec407a; font-size: 0.95em; max-height: 400px; overflow-y: auto;'>
+            <div style='background-color: #fce4ec; padding: 12px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #ec407a; font-size: 0.95em; max-height: 400px; overflow-y: auto;'>
                 <b>🤖 Latest Response:</b><br><br>{last_msg['content']}
             </div>
             """, unsafe_allow_html=True)
